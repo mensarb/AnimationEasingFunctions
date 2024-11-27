@@ -1,18 +1,32 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION.toInteger()
+    namespace("com.daimajia.easing")
+
+    compileSdk(35)
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION.toInteger()
-        targetSdkVersion TARGET_SDK_VERSION.toInteger()
-        versionCode VERSION_CODE.toInteger()
-        versionName VERSION_NAME
+        minSdk(25)
+        targetSdk(35)
+
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildTypes {
         release {
             minifyEnabled false
+
             consumerProguardFiles 'proguard-rules.pro'
         }
     }
@@ -21,5 +35,3 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
-
-apply from: './gradle-mvn-push.gradle'
